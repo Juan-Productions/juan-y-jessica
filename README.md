@@ -114,7 +114,11 @@ Para cambiar los horarios o el texto de cada parada, editá los bloques
 `data-stop` dentro de `<div id="itin">` en `index.html` — cada uno es un
 `<p>` con la hora y otro con el nombre del momento. `data-side` controla
 desde qué lado entra al hacer scroll (`1` derecha, `-1` izquierda, `0`
-centro). La cuenta regresiva de la portada usa el mismo horario de la
+centro). Los textos están posicionados con `top`/`left`/`right` en
+píxeles del póster (1225 px de ancho) para que caigan en los espacios
+libres entre los dibujos; **si agrandás la letra o cambiás un texto por
+otro más largo, revisá que no se crucen con las líneas del dibujo** (el
+cable que une las ilustraciones pasa justo debajo de varias paradas). La cuenta regresiva de la portada usa el mismo horario de la
 ceremonia (`target` dentro de `renderVals()`); si cambia la hora de la
 ceremonia, actualizá los dos lugares.
 

@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <script>
 (function () {
-  var BUILD_VERSION = "2026-09-19.7";
+  var BUILD_VERSION = "2026-09-19.8";
   try {
     if (sessionStorage.getItem('dc_reloaded_for_version')) return;
     fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
@@ -23,7 +23,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="build-version" content="2026-09-19.7">
+<meta name="build-version" content="2026-09-19.8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jessica &amp; Juan Daniel — Invitación de boda</title>
 <meta name="description" content="Con alegría y gratitud a Dios te invitamos a celebrar nuestra boda: sábado 24 de octubre de 2026, Santa Helena Campestre. Confirma tu asistencia aquí.">
@@ -43,11 +43,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <script>
   window.__resources = {
-    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react.production.min.js?v=2026-09-19.7",
-    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom.production.min.js?v=2026-09-19.7"
+    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react.production.min.js?v=2026-09-19.8",
+    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom.production.min.js?v=2026-09-19.8"
   };
 </script>
-<script src="assets/vendor/dc-runtime.js?v=2026-09-19.7"></script>
+<script src="assets/vendor/dc-runtime.js?v=2026-09-19.8"></script>
 </head>
 <body>
 <x-dc>
@@ -655,7 +655,7 @@
 <div style="max-width:900px;margin:0 auto;background:#f3f2f2">
 
   <sc-if value="{{ showIntro }}" hint-placeholder-val="{{ true }}">
-    <x-import component-from-global-scope="IntroCover" from="./assets/intro-cover.js?v=2026-09-19.7" hint-size="100%,100%" style="position:fixed;inset:0;z-index:100"></x-import>
+    <x-import component-from-global-scope="IntroCover" from="./assets/intro-cover.js?v=2026-09-19.8" hint-size="100%,100%" style="position:fixed;inset:0;z-index:100"></x-import>
   </sc-if>
 
   <sc-if value="{{ musicAvailable }}" hint-placeholder-val="{{ false }}">
@@ -771,7 +771,7 @@
 
       <img data-art="1" src="assets/photos/itinerario-art.jpg" loading="lazy" decoding="async" alt="Ilustraciones del itinerario: flores y anillos, copas, mesa servida, pareja bailando, micrófono y guitarra, tornamesa, luna y cama" style="display: block; width: 1225px; height: 2399px;">
 
-      <div data-stop="0" data-side="0" style="position: absolute; left: 0; right: 0; top: 62px; text-align: center;">
+      <div data-stop="0" data-side="0" style="position: absolute; left: 0; right: 0; top: 60px; text-align: center;">
         <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-style: italic; font-size: 108px; line-height: 1.1; letter-spacing: 0.01em;">Itinerario del día</h2>
         <p style="margin: 18px 0 0; font-family: var(--font-heading); font-size: 60px; font-variant-numeric: tabular-nums; color: var(--color-neutral-700);">Llegada de invitados: 4:30 PM</p>
       </div>
@@ -781,22 +781,22 @@
         <p style="margin: 0; font-family: var(--font-heading); font-style: italic; font-size: 58px; line-height: 1.24; color: var(--color-neutral-700);">Ceremonia</p>
       </div>
 
-      <div data-stop="2" data-side="-1" style="position: absolute; right: 565px; top: 742px; text-align: right;">
+      <div data-stop="2" data-side="-1" style="position: absolute; right: 565px; top: 728px; text-align: right;">
         <p style="margin: 0; font-family: var(--font-heading); font-style: italic; font-size: 62px; line-height: 1.24; font-variant-numeric: tabular-nums; color: var(--color-accent-700);">5:45 PM</p>
         <p style="margin: 0; font-family: var(--font-heading); font-style: italic; font-size: 58px; line-height: 1.24; color: var(--color-neutral-700);">Cóctel</p>
       </div>
 
-      <div data-stop="3" data-side="1" style="position: absolute; left: 640px; top: 1018px;">
+      <div data-stop="3" data-side="1" style="position: absolute; left: 640px; top: 976px;">
         <p style="margin: 0; font-family: var(--font-heading); font-style: italic; font-size: 62px; line-height: 1.24; font-variant-numeric: tabular-nums; color: var(--color-accent-700);">6:45 PM</p>
         <p style="margin: 0; font-family: var(--font-heading); font-style: italic; font-size: 58px; line-height: 1.24; color: var(--color-neutral-700);">Recepción</p>
       </div>
 
-      <div data-stop="4" data-side="-1" style="position: absolute; right: 665px; top: 1268px; text-align: right;">
+      <div data-stop="4" data-side="-1" style="position: absolute; right: 665px; top: 1246px; text-align: right;">
         <p style="margin: 0; font-family: var(--font-heading); font-style: italic; font-size: 62px; line-height: 1.24; font-variant-numeric: tabular-nums; color: var(--color-accent-700);">8:30 PM</p>
         <p style="margin: 0; font-family: var(--font-heading); font-style: italic; font-size: 58px; line-height: 1.24; color: var(--color-neutral-700);">Baile nupcial</p>
       </div>
 
-      <div data-stop="5" data-side="1" style="position: absolute; left: 640px; top: 1545px;">
+      <div data-stop="5" data-side="1" style="position: absolute; left: 640px; top: 1515px;">
         <p style="margin: 0; font-family: var(--font-heading); font-style: italic; font-size: 62px; line-height: 1.24; font-variant-numeric: tabular-nums; color: var(--color-accent-700);">9:00 PM</p>
         <p style="margin: 0; font-family: var(--font-heading); font-style: italic; font-size: 58px; line-height: 1.24; color: var(--color-neutral-700);">Música en vivo</p>
       </div>
@@ -1039,7 +1039,7 @@ class Component extends DCLogic {
   componentDidMount() {
     var self = this;
     this.timer = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
-    this.audio = new Audio("./assets/audio/musica.mp3?v=2026-09-19.7");
+    this.audio = new Audio("./assets/audio/musica.mp3?v=2026-09-19.8");
     this.audio.loop = true;
     this.audio.volume = 0.5;
     this.audio.addEventListener("error", function () { self.setState({ audioReady: false, musicOn: false }); });

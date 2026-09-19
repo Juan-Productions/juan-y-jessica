@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <script>
 (function () {
-  var BUILD_VERSION = "2026-09-19.1";
+  var BUILD_VERSION = "2026-09-19.2";
   try {
     if (sessionStorage.getItem('dc_reloaded_for_version')) return;
     fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
@@ -23,16 +23,16 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="build-version" content="2026-09-19.1">
+<meta name="build-version" content="2026-09-19.2">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Juan Daniel &amp; Jessica — Invitación de boda</title>
 <script>
   window.__resources = {
-    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react.production.min.js?v=2026-09-19.1",
-    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom.production.min.js?v=2026-09-19.1"
+    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react.production.min.js?v=2026-09-19.2",
+    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom.production.min.js?v=2026-09-19.2"
   };
 </script>
-<script src="assets/vendor/dc-runtime.js?v=2026-09-19.1"></script>
+<script src="assets/vendor/dc-runtime.js?v=2026-09-19.2"></script>
 </head>
 <body>
 <x-dc>
@@ -754,7 +754,7 @@
 
       <div data-stop="0" data-side="0" style="position: absolute; left: 0; right: 0; top: 62px; text-align: center;">
         <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-style: italic; font-size: 108px; line-height: 1.1; letter-spacing: 0.01em;">Itinerario del día</h2>
-        <p style="margin: 18px 0 0; font-family: var(--font-heading); font-size: 36px; font-variant-numeric: tabular-nums; color: var(--color-neutral-700);">Llegada de invitados: 4:30 PM</p>
+        <p style="margin: 18px 0 0; font-family: var(--font-heading); font-size: 52px; font-variant-numeric: tabular-nums; color: var(--color-neutral-700);">Llegada de invitados: 4:30 PM</p>
       </div>
 
       <div data-stop="1" data-side="1" style="position: absolute; left: 640px; top: 428px;">
@@ -1020,7 +1020,7 @@ class Component extends DCLogic {
   componentDidMount() {
     var self = this;
     this.timer = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
-    this.audio = new Audio("./assets/audio/musica.mp3?v=2026-09-19.1");
+    this.audio = new Audio("./assets/audio/musica.mp3?v=2026-09-19.2");
     this.audio.loop = true;
     this.audio.volume = 0.5;
     this.audio.addEventListener("error", function () { self.setState({ audioReady: false, musicOn: false }); });

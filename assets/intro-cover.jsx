@@ -12,8 +12,8 @@
 // el componente principal de la página) y se desvanece.
 
 var W = 720, H = 1280, SPLIT = 362;
-var SEAL_IMG = './assets/photos/seal_blank.png';
-var LAND_IMG = './assets/photos/land.png';
+var SEAL_IMG = './assets/photos/seal_blank.jpg';
+var LAND_IMG = './assets/photos/land.jpg';
 var INTRO_AUDIO_SRC = './assets/audio/Intro portada sonido.mp3';
 var MORE_INFO_AT = 22;
 

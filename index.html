@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <script>
 (function () {
-  var BUILD_VERSION = "2026-09-18.9";
+  var BUILD_VERSION = "2026-09-19.1";
   try {
     if (sessionStorage.getItem('dc_reloaded_for_version')) return;
     fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
@@ -23,16 +23,16 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="build-version" content="2026-09-18.9">
+<meta name="build-version" content="2026-09-19.1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Juan Daniel &amp; Jessica — Invitación de boda</title>
 <script>
   window.__resources = {
-    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react.production.min.js?v=2026-09-18.9",
-    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom.production.min.js?v=2026-09-18.9"
+    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react.production.min.js?v=2026-09-19.1",
+    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom.production.min.js?v=2026-09-19.1"
   };
 </script>
-<script src="assets/vendor/dc-runtime.js?v=2026-09-18.9"></script>
+<script src="assets/vendor/dc-runtime.js?v=2026-09-19.1"></script>
 </head>
 <body>
 <x-dc>
@@ -939,6 +939,24 @@
       </div>
     </sc-if>
 
+    <sc-if value="{{ isAlready }}" hint-placeholder-val="{{ false }}">
+      <div class="premium-card" style="padding:40px 28px;max-width:520px;margin:0 auto;text-align:center">
+        <div class="icon-badge">
+          <svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="#b68235" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;margin:0 0 12px">Ya recibimos tu confirmación</h3>
+        <p style="font-size:14px;opacity:0.8;margin:0 0 8px"><strong style="font-weight:600">{{ familyName }}</strong> ya confirmó su asistencia. ¡Gracias por responder!</p>
+        <p style="font-size:13px;opacity:0.65;margin:0 0 24px">Si necesitas hacer algún cambio, escríbenos y lo ajustamos.</p>
+        <button class="btn" sc-camel-on-click="{{ reset }}" style="cursor:pointer;font-family:'Lora',serif;font-size:13px;color:#201f1d;background:transparent;border:1px solid rgba(32,31,29,0.16);padding:10px 16px;border-radius:4px">
+          Buscar otro nombre
+        </button>
+        <div style="margin-top:28px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;opacity:0.7">Con cariño, Juan Daniel &amp; Jessica</div>
+      </div>
+    </sc-if>
+
     <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
       <div class="premium-card" style="padding:40px 28px;max-width:520px;margin:0 auto;text-align:center">
         <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;margin:0 0 12px">Gracias, {{ familyName }}</h3>
@@ -1002,7 +1020,7 @@ class Component extends DCLogic {
   componentDidMount() {
     var self = this;
     this.timer = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
-    this.audio = new Audio("./assets/audio/musica.mp3?v=2026-09-18.9");
+    this.audio = new Audio("./assets/audio/musica.mp3?v=2026-09-19.1");
     this.audio.loop = true;
     this.audio.volume = 0.5;
     this.audio.addEventListener("error", function () { self.setState({ audioReady: false, musicOn: false }); });
@@ -1161,12 +1179,16 @@ class Component extends DCLogic {
       .catch(function () { return new Promise(function (res) { setTimeout(res, 700); }).then(intento); })
       .then(function (list) {
         return list.map(function (g) {
-          return { familia: g.familia, titular: g.titular, cupos: Math.max(1, Number(g.cupos) || 1) };
+          return { familia: g.familia, titular: g.titular, cupos: Math.max(1, Number(g.cupos) || 1), confirmada: g.confirmada === true };
         });
       });
   }
 
   pickFamily(g) {
+    if (g.confirmada) {
+      this.setState({ step: "already", family: g, members: [], searchError: "", matches: [] });
+      return;
+    }
     var members = [{ name: g.titular, attending: null }];
     for (var i = 1; i < g.cupos; i++) members.push({ name: "", attending: null });
     this.setState({ step: "family", family: g, members: members, searchError: "", matches: [] });
@@ -1273,11 +1295,12 @@ class Component extends DCLogic {
         return {
           familia: g.familia,
           titular: g.titular,
-          cupos: g.cupos === 1 ? "1 cupo" : g.cupos + " cupos",
+          cupos: g.confirmada ? "Ya confirmada" : (g.cupos === 1 ? "1 cupo" : g.cupos + " cupos"),
           pick: function () { self.pickFamily(g); }
         };
       }),
       isFamily: this.state.step === "family",
+      isAlready: this.state.step === "already",
       isDone: this.state.step === "done",
       query: this.state.query,
       searchError: this.state.searchError,

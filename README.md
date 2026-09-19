@@ -1,4 +1,4 @@
-# Invitación de boda — Juan Daniel & Jessica
+# Invitación de boda — Jessica & Juan Daniel
 
 Invitación web de una sola página, con cuenta regresiva, música de fondo y confirmación de asistencia (RSVP) contra una hoja de Google Sheets.
 

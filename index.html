@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <script>
 (function () {
-  var BUILD_VERSION = "2026-09-19.10";
+  var BUILD_VERSION = "2026-09-21.2";
   try {
     if (sessionStorage.getItem('dc_reloaded_for_version')) return;
     fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
@@ -23,7 +23,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="build-version" content="2026-09-19.10">
+<meta name="build-version" content="2026-09-21.2">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jessica &amp; Juan Daniel — Invitación de boda</title>
 <meta name="description" content="Con alegría y gratitud a Dios te invitamos a celebrar nuestra boda: sábado 24 de octubre de 2026, Santa Helena Campestre. Confirma tu asistencia aquí.">
@@ -43,11 +43,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <script>
   window.__resources = {
-    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react.production.min.js?v=2026-09-19.10",
-    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom.production.min.js?v=2026-09-19.10"
+    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react.production.min.js?v=2026-09-21.2",
+    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom.production.min.js?v=2026-09-21.2"
   };
 </script>
-<script src="assets/vendor/dc-runtime.js?v=2026-09-19.10"></script>
+<script src="assets/vendor/dc-runtime.js?v=2026-09-21.2"></script>
 </head>
 <body>
 <x-dc>
@@ -645,6 +645,55 @@
     .verse-photo img { animation: none; }
   }
 
+  /* Fila de cada persona en el RSVP: el campo del nombre y los botones
+     "Asiste / No asiste" siempre quedan uno al lado del otro. En pantallas
+     angostas los dos botones se apilan (uno sobre otro) para dejarle al
+     campo el ancho suficiente para un nombre completo. */
+  .rsvp-member {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(32,31,29,0.16);
+  }
+  .rsvp-name {
+    flex: 1;
+    min-width: 0;
+    min-height: 48px;
+    padding: 10px 12px;
+    font: inherit;
+    font-size: 16px;
+    color: #201f1d;
+    background: transparent;
+    border: 1px solid rgba(32,31,29,0.16);
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .rsvp-choice {
+    display: flex;
+    flex: none;
+    gap: 8px;
+  }
+  .rsvp-btn {
+    cursor: pointer;
+    flex: none;
+    white-space: nowrap;
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    min-height: 44px;
+    padding: 10px 18px;
+    border-radius: 4px;
+    background: transparent;
+  }
+  @media (max-width: 520px) {
+    .rsvp-choice { flex-direction: column; gap: 6px; width: 104px; }
+    .rsvp-btn { width: 100%; padding: 10px 6px; }
+  }
+  @media (max-width: 340px) {
+    .rsvp-choice { width: 94px; }
+    .rsvp-btn { font-size: 15px; }
+  }
+
   :root {
     --color-text: #201f1d;
     --color-accent-600: #b68235;
@@ -672,7 +721,7 @@
 <div style="max-width:900px;margin:0 auto;background:#f3f2f2">
 
   <sc-if value="{{ showIntro }}" hint-placeholder-val="{{ true }}">
-    <x-import component-from-global-scope="IntroCover" from="./assets/intro-cover.js?v=2026-09-19.10" hint-size="100%,100%" style="position:fixed;inset:0;z-index:100"></x-import>
+    <x-import component-from-global-scope="IntroCover" from="./assets/intro-cover.js?v=2026-09-21.2" hint-size="100%,100%" style="position:fixed;inset:0;z-index:100"></x-import>
   </sc-if>
 
   <sc-if value="{{ musicAvailable }}" hint-placeholder-val="{{ false }}">
@@ -910,7 +959,7 @@
       <div style="max-width:480px;margin:0 auto">
         <label style="display:block;font-size:15px;margin-bottom:5px;color:rgba(32,31,29,0.88)">Escribe tu nombre completo</label>
         <div style="display:flex;gap:10px;align-items:flex-start">
-          <input type="text" value="{{ query }}" sc-camel-on-change="{{ setQuery }}" sc-camel-on-key-down="{{ onSearchKey }}" placeholder="Ej. Andrés Ruz" style="flex:1;min-height:48px;padding:10px 12px;font:inherit;font-size:16px;color:#201f1d;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px;box-sizing:border-box">
+          <input type="text" value="{{ query }}" sc-camel-on-change="{{ setQuery }}" sc-camel-on-focus="{{ onSearchFocus }}" sc-camel-on-key-down="{{ onSearchKey }}" placeholder="Ej. Andrés Ruz" autocomplete="off" style="flex:1;min-height:48px;padding:10px 12px;font:inherit;font-size:16px;color:#201f1d;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px;box-sizing:border-box">
           <button class="btn btn-solid-hover" sc-camel-on-click="{{ doSearch }}" style="cursor:pointer;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:17px;color:#7d5411;background:transparent;border:1px solid #b68235;padding:13px 22px;border-radius:4px;white-space:nowrap">
             {{ searchLabel }}
           </button>
@@ -948,11 +997,11 @@
         <p style="font-size:15px;opacity:0.85;margin:0 0 18px">Escribe el nombre de todas las personas de tu invitación e indica en cada una si podrá acompañarnos. Si algún cupo no se usará, escribe el nombre y marca «No asiste».</p>
 
         <sc-for list="{{ members }}" as="m" hint-placeholder-count="3">
-          <div style="border-bottom:1px solid rgba(32,31,29,0.16);padding:14px 0;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-            <input type="text" value="{{ m.name }}" sc-camel-on-change="{{ m.onName }}" placeholder="{{ m.placeholder }}" style="flex:1;min-width:180px;min-height:48px;padding:10px 12px;font:inherit;font-size:16px;color:#201f1d;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px;box-sizing:border-box">
-            <div style="display:flex;gap:8px">
-              <button class="btn" sc-camel-on-click="{{ m.setYes }}" style="cursor:pointer;flex:none;white-space:nowrap;font-family:'Lora',serif;font-size:16px;padding:11px 18px;border-radius:4px;background:transparent;border:1px solid {{ m.yesBorder }};color:{{ m.yesColor }}">Asiste</button>
-              <button class="btn" sc-camel-on-click="{{ m.setNo }}" style="cursor:pointer;flex:none;white-space:nowrap;font-family:'Lora',serif;font-size:16px;padding:11px 18px;border-radius:4px;background:transparent;border:1px solid {{ m.noBorder }};color:{{ m.noColor }}">No asiste</button>
+          <div class="rsvp-member">
+            <input class="rsvp-name" type="text" value="{{ m.name }}" sc-camel-on-change="{{ m.onName }}" placeholder="{{ m.placeholder }}">
+            <div class="rsvp-choice">
+              <button class="btn rsvp-btn" sc-camel-on-click="{{ m.setYes }}" style="border:1px solid {{ m.yesBorder }};color:{{ m.yesColor }};background:{{ m.yesBg }}">Asiste</button>
+              <button class="btn rsvp-btn" sc-camel-on-click="{{ m.setNo }}" style="border:1px solid {{ m.noBorder }};color:{{ m.noColor }};background:{{ m.noBg }}">No asiste</button>
             </div>
           </div>
         </sc-for>
@@ -1043,6 +1092,13 @@ var VERSE_PHOTO = { src: "./assets/photos/versiculo.jpg", alt: "Jessica y Juan D
 // en este archivo público.
 var SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbxfWbrKlluNf8Mt0E105hhYgZU9W6K88dV96C1s1SjHdwWoKk-ogZCzr3kq9HB2rmuA/exec";
 
+// Búsqueda de invitados. Apps Script responde en ~2s en el mejor caso y a
+// veces se cuelga, así que el sitio esconde esa espera (ver findMatches).
+var SEARCH_CAP = 8;            // máximo de resultados que devuelve el script
+var SEARCH_HEDGE_MS = 3500;    // si un intento no respondió, se lanza otro en paralelo
+var SEARCH_DEADLINE_MS = 16000; // tiempo máximo total antes de mostrar el error
+var SEARCH_CACHE_MS = 120000;  // cuánto se recuerda una respuesta
+
 function normalize(s) {
   return (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
 }
@@ -1050,13 +1106,13 @@ function normalize(s) {
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { step: "search", query: "", searchError: "", family: null, members: [], matches: [], message: "", now: Date.now(), musicOn: false, audioReady: false, opened: false, introDone: false, carouselIndex: 0, galleryRatio: {}, searching: false, lightboxImage: null };
+    this.state = { step: "search", query: "", searchError: "", family: null, members: [], matches: [], message: "", now: Date.now(), musicOn: false, audioReady: false, opened: false, introDone: false, carouselIndex: 0, galleryRatio: {}, searching: false, searchNote: "", lightboxImage: null };
   }
 
   componentDidMount() {
     var self = this;
     this.timer = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
-    this.audio = new Audio("./assets/audio/musica.mp3?v=2026-09-19.10");
+    this.audio = new Audio("./assets/audio/musica.mp3?v=2026-09-21.2");
     this.audio.loop = true;
     this.audio.volume = 0.5;
     this.audio.addEventListener("error", function () { self.setState({ audioReady: false, musicOn: false }); });
@@ -1113,6 +1169,8 @@ class Component extends DCLogic {
     clearInterval(this.timer);
     clearInterval(this.galleryTimer);
     clearTimeout(this.introWatchdog);
+    clearTimeout(this._adelantoTimer);
+    clearTimeout(this._notaTimer);
     if (this.audio) this.audio.pause();
     document.documentElement.style.overflow = "";
     document.removeEventListener("keydown", this.onKeyDown);
@@ -1204,30 +1262,127 @@ class Component extends DCLogic {
     requestAnimationFrame(step);
   }
 
+  // Pide la lista al Apps Script. Si un intento no responde en
+  // SEARCH_HEDGE_MS se lanza otro en paralelo (hasta 3) y gana el primero que
+  // conteste: así una llamada que se cuelga no obliga a esperar a que venza.
+  fetchList(url) {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+      var terminado = false, lanzados = 0, activos = 0, ctrls = [], timers = [];
+      function cerrar() {
+        terminado = true;
+        timers.forEach(clearTimeout);
+        ctrls.forEach(function (c) { try { c.abort(); } catch (e) {} });
+      }
+      function lanzar() {
+        if (terminado || lanzados >= 3) return;
+        lanzados++; activos++;
+        self._ultimoPedido = Date.now();
+        var ctrl = typeof AbortController === "function" ? new AbortController() : null;
+        if (ctrl) ctrls.push(ctrl);
+        fetch(url, ctrl ? { signal: ctrl.signal } : undefined)
+          .then(function (r) { return r.json(); })
+          .then(function (list) {
+            if (terminado) return;
+            if (!Array.isArray(list)) throw new Error("respuesta inválida");
+            cerrar(); resolve(list);
+          })
+          .catch(function () {
+            if (terminado) return;
+            activos--;
+            if (activos === 0) {
+              if (lanzados < 3) timers.push(setTimeout(lanzar, 300));
+              else { cerrar(); reject(new Error("sin respuesta")); }
+            }
+          });
+      }
+      lanzar();
+      timers.push(setTimeout(lanzar, SEARCH_HEDGE_MS));
+      timers.push(setTimeout(lanzar, SEARCH_HEDGE_MS * 2));
+      timers.push(setTimeout(function () { if (!terminado) { cerrar(); reject(new Error("tiempo agotado")); } }, SEARCH_DEADLINE_MS));
+    });
+  }
+
+  // Busca familias por nombre/apellido. Para que se sienta instantáneo:
+  //  1) una respuesta reciente a la misma búsqueda se devuelve al instante;
+  //  2) si ya se buscó algo más corto que trajo TODOS sus resultados (menos
+  //     de SEARCH_CAP), se filtra en el momento: quien escribió "ver" y ahora
+  //     escribe "vergara" no espera otra consulta (todo lo que coincide con
+  //     "vergara" también coincidía con "ver");
+  //  3) si hay un pedido igual en curso (por ejemplo el que se adelantó
+  //     mientras la persona escribía), se reutiliza en vez de repetirlo.
   findMatches(q) {
     if (!SHEET_ENDPOINT) return Promise.reject(new Error("sin SHEET_ENDPOINT"));
-    var url = SHEET_ENDPOINT + "?q=" + encodeURIComponent(q.trim());
-    function intento() {
-      var ctrl = typeof AbortController === "function" ? new AbortController() : null;
-      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 10000);
-      return fetch(url, ctrl ? { signal: ctrl.signal } : undefined)
-        .then(function (r) { return r.json(); })
-        .then(function (list) {
-          clearTimeout(timer);
-          if (!Array.isArray(list)) throw new Error("respuesta inválida");
-          return list;
-        }, function (e) { clearTimeout(timer); throw e; });
-    }
-    // Apps Script a veces tarda mucho o directamente no responde (arranque
-    // en frío): cada intento se corta a los 10s y se reintenta una vez, así
-    // el botón nunca queda en "Buscando…" para siempre.
-    return intento()
-      .catch(function () { return new Promise(function (res) { setTimeout(res, 700); }).then(intento); })
-      .then(function (list) {
-        return list.map(function (g) {
-          return { familia: g.familia, titular: g.titular, cupos: Math.max(1, Number(g.cupos) || 1), confirmada: g.confirmada === true };
+    var self = this;
+    var n = normalize(q);
+    var ahora = Date.now();
+    this._cache = this._cache || {};
+    this._inflight = this._inflight || {};
+
+    var hit = this._cache[n];
+    if (hit && ahora - hit.at < SEARCH_CACHE_MS) return Promise.resolve(hit.list);
+
+    for (var k in this._cache) {
+      var e = this._cache[k];
+      if (e.completa && ahora - e.at < SEARCH_CACHE_MS && n.indexOf(k) !== -1) {
+        var filtrada = e.list.filter(function (g) {
+          return normalize(g.familia).indexOf(n) !== -1 || normalize(g.titular).indexOf(n) !== -1;
         });
+        this._cache[n] = { list: filtrada, at: e.at, completa: true };
+        return Promise.resolve(filtrada);
+      }
+    }
+
+    if (this._inflight[n]) return this._inflight[n];
+
+    var url = SHEET_ENDPOINT + "?q=" + encodeURIComponent(q.trim());
+    var p = this.fetchList(url).then(function (list) {
+      var items = list.map(function (g) {
+        return { familia: g.familia, titular: g.titular, cupos: Math.max(1, Number(g.cupos) || 1), confirmada: g.confirmada === true };
       });
+      self._cache[n] = { list: items, at: Date.now(), completa: items.length < SEARCH_CAP };
+      delete self._inflight[n];
+      self.seguirBusqueda();
+      return items;
+    }, function (err) {
+      delete self._inflight[n];
+      throw err;
+    });
+    this._inflight[n] = p;
+    return p;
+  }
+
+  // Mientras la persona escribe, se adelanta la consulta (con una pausa de
+  // 350 ms para no pedir en cada tecla): cuando toque "Buscar" la respuesta
+  // ya está lista o falta poco.
+  adelantarBusqueda(valor) {
+    var self = this;
+    clearTimeout(this._adelantoTimer);
+    if (normalize(valor).length < 3) return;
+    this._adelantoTimer = setTimeout(function () {
+      if (self.state.step !== "search") return;
+      var q = (self.state.query || "").trim();
+      if (normalize(q).length >= 3) self.findMatches(q).catch(function () {});
+    }, 350);
+  }
+
+  // Al terminar un pedido, si la persona siguió escribiendo y lo nuevo no se
+  // puede resolver con lo que ya llegó, se adelanta también (solo tras un
+  // pedido exitoso, para no reintentar en bucle si Google está caído).
+  seguirBusqueda() {
+    if (this.state.step !== "search" || this.state.searching) return;
+    var q = (this.state.query || "").trim();
+    if (normalize(q).length >= 3) this.findMatches(q).catch(function () {});
+  }
+
+  // "Despierta" al Apps Script cuando la persona toca el campo del nombre:
+  // la primera llamada tras un rato sin uso es la más lenta.
+  calentarBusqueda() {
+    if (!SHEET_ENDPOINT) return;
+    var ahora = Date.now();
+    if (ahora - (this._ultimoPedido || 0) < 120000) return;
+    this._ultimoPedido = ahora;
+    try { fetch(SHEET_ENDPOINT + "?q=", { mode: "no-cors" }).catch(function () {}); } catch (e) {}
   }
 
   pickFamily(g) {
@@ -1248,20 +1403,27 @@ class Component extends DCLogic {
       this.setState({ searchError: "Escribe al menos 3 letras de tu nombre o apellido.", matches: [] });
       return;
     }
-    this.setState({ searching: true, searchError: "" });
+    this.setState({ searching: true, searchError: "", searchNote: "" });
+    // Si tarda, se le avisa que sigue trabajando (para que no crea que se trabó).
+    clearTimeout(this._notaTimer);
+    this._notaTimer = setTimeout(function () {
+      if (self.state.searching) self.setState({ searchNote: "Sigue buscando, puede tardar unos segundos…" });
+    }, 2500);
     this.findMatches(q).then(function (found) {
+      clearTimeout(self._notaTimer);
       // Si mientras esperaba cambió el texto (o se reinició), se descarta.
-      if (self.state.query.trim() !== q) { self.setState({ searching: false }); return; }
+      if (self.state.query.trim() !== q) { self.setState({ searching: false, searchNote: "" }); return; }
       if (found.length === 0) {
-        self.setState({ searching: false, searchError: "No encontramos tu nombre en la lista. Escríbenos y lo revisamos.", matches: [] });
+        self.setState({ searching: false, searchNote: "", searchError: "No encontramos tu nombre en la lista. Escríbenos y lo revisamos.", matches: [] });
       } else if (found.length === 1) {
-        self.setState({ searching: false });
+        self.setState({ searching: false, searchNote: "" });
         self.pickFamily(found[0]);
       } else {
-        self.setState({ searching: false, step: "choose", matches: found, searchError: "" });
+        self.setState({ searching: false, searchNote: "", step: "choose", matches: found, searchError: "" });
       }
     }).catch(function () {
-      self.setState({ searching: false, searchError: "No pudimos consultar la lista en este momento. Intenta de nuevo en unos segundos." });
+      clearTimeout(self._notaTimer);
+      self.setState({ searching: false, searchNote: "", searchError: "No pudimos consultar la lista en este momento. Intenta de nuevo en unos segundos." });
     });
   }
 
@@ -1349,7 +1511,7 @@ class Component extends DCLogic {
       isAlready: this.state.step === "already",
       isDone: this.state.step === "done",
       query: this.state.query,
-      searchError: this.state.searchError,
+      searchError: this.state.searchError || this.state.searchNote,
       searchLabel: this.state.searching ? "Buscando…" : "Buscar",
       message: this.state.message,
       familyName: fam ? fam.familia : "",
@@ -1370,16 +1532,25 @@ class Component extends DCLogic {
         return {
           name: m.name,
           placeholder: i === 0 ? "Titular de la invitación" : "Acompañante " + i,
-          yesBorder: m.attending === true ? "#b68235" : "rgba(32,31,29,0.16)",
-          yesColor: m.attending === true ? "#7d5411" : "rgba(32,31,29,0.6)",
-          noBorder: m.attending === false ? "#b68235" : "rgba(32,31,29,0.16)",
-          noColor: m.attending === false ? "rgba(32,31,29,0.9)" : "rgba(32,31,29,0.6)",
+          // El botón elegido va relleno (se distingue de un vistazo); el otro,
+          // con texto oscuro y borde visible.
+          yesBorder: m.attending === true ? "#7d5411" : "rgba(32,31,29,0.4)",
+          yesColor: m.attending === true ? "#faf9f6" : "#201f1d",
+          yesBg: m.attending === true ? "#7d5411" : "transparent",
+          noBorder: m.attending === false ? "#3b3a38" : "rgba(32,31,29,0.4)",
+          noColor: m.attending === false ? "#faf9f6" : "#201f1d",
+          noBg: m.attending === false ? "#3b3a38" : "transparent",
           onName: function (e) { self.updateMember(i, { name: e.target.value }); },
           setYes: function () { self.updateMember(i, { attending: true }); },
           setNo: function () { self.updateMember(i, { attending: false }); }
         };
       }),
-      setQuery: function (e) { self.setState({ query: e.target.value, searchError: "" }); },
+      setQuery: function (e) {
+        var v = e.target.value;
+        self.setState({ query: v, searchError: "", searchNote: "" });
+        self.adelantarBusqueda(v);
+      },
+      onSearchFocus: function () { self.calentarBusqueda(); },
       onSearchKey: function (e) { if (e.key === "Enter") { e.preventDefault(); self.search(); } },
       doSearch: function () { self.search(); },
       setMessage: function (e) { self.setState({ message: e.target.value }); },
@@ -1414,6 +1585,7 @@ class Component extends DCLogic {
             body: JSON.stringify({ rows: rows })
           }).catch(function () {});
         }
+        self._cache = {};  // que una búsqueda posterior vea a la familia como ya confirmada
         self.setState({ step: "done", formError: "" });
       },
       reset: function () { self.setState({ step: "search", query: "", family: null, members: [], matches: [], message: "", searchError: "" }); }

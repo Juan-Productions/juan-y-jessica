@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <script>
 (function () {
-  var BUILD_VERSION = "2026-09-21.2";
+  var BUILD_VERSION = "2026-10-11.3";
   try {
     if (sessionStorage.getItem('dc_reloaded_for_version')) return;
     fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
@@ -23,7 +23,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="build-version" content="2026-09-21.2">
+<meta name="build-version" content="2026-10-11.3">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jessica &amp; Juan Daniel — Invitación de boda</title>
 <meta name="description" content="Con alegría y gratitud a Dios te invitamos a celebrar nuestra boda: sábado 24 de octubre de 2026, Santa Helena Campestre. Confirma tu asistencia aquí.">
@@ -43,11 +43,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <script>
   window.__resources = {
-    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react.production.min.js?v=2026-09-21.2",
-    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom.production.min.js?v=2026-09-21.2"
+    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react.production.min.js?v=2026-10-11.3",
+    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom.production.min.js?v=2026-10-11.3"
   };
 </script>
-<script src="assets/vendor/dc-runtime.js?v=2026-09-21.2"></script>
+<script src="assets/vendor/dc-runtime.js?v=2026-10-11.3"></script>
 </head>
 <body>
 <x-dc>
@@ -721,7 +721,7 @@
 <div style="max-width:900px;margin:0 auto;background:#f3f2f2">
 
   <sc-if value="{{ showIntro }}" hint-placeholder-val="{{ true }}">
-    <x-import component-from-global-scope="IntroCover" from="./assets/intro-cover.js?v=2026-09-21.2" hint-size="100%,100%" style="position:fixed;inset:0;z-index:100"></x-import>
+    <x-import component-from-global-scope="IntroCover" from="./assets/intro-cover.js?v=2026-10-11.3" hint-size="100%,100%" style="position:fixed;inset:0;z-index:100"></x-import>
   </sc-if>
 
   <sc-if value="{{ musicAvailable }}" hint-placeholder-val="{{ false }}">
@@ -953,7 +953,7 @@
     </div>
     <span class="eyebrow">RSVP</span>
     <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;text-align:center;margin:0 0 8px">Confirma tu asistencia</h2>
-    <p style="text-align:center;font-size:15px;opacity:0.8;margin:0 0 36px">Por favor confirma antes del 11 octubre</p>
+    <p style="text-align:center;font-size:15px;line-height:1.55;opacity:0.9;max-width:520px;margin:0 auto 36px">{{ rsvpIntro }}</p>
 
     <sc-if value="{{ isSearch }}" hint-placeholder-val="{{ true }}">
       <div style="max-width:480px;margin:0 auto">
@@ -1014,8 +1014,8 @@
         <p style="font-size:15px;color:#7d5411;margin:16px 0 0;min-height:18px">{{ formError }}</p>
 
         <div style="display:flex;gap:12px;margin-top:12px;align-items:center">
-          <button class="btn btn-solid-hover" sc-camel-on-click="{{ confirm }}" style="flex:1;cursor:pointer;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;color:#7d5411;background:transparent;border:1px solid #b68235;padding:13px 20px;border-radius:4px">
-            Confirmar asistencia
+          <button class="btn btn-solid-hover" sc-camel-on-click="{{ confirm }}" style="flex:1;cursor:pointer;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;color:#7d5411;background:transparent;border:1px solid #b68235;padding:13px 20px;border-radius:4px;opacity:{{ confirmOpacity }}">
+            {{ confirmLabel }}
           </button>
           <button class="btn" sc-camel-on-click="{{ reset }}" style="cursor:pointer;font-family:'Lora',serif;font-size:15px;color:#201f1d;background:transparent;border:1px solid rgba(32,31,29,0.16);padding:13px 16px;border-radius:4px">
             Volver
@@ -1038,6 +1038,29 @@
         <button class="btn" sc-camel-on-click="{{ reset }}" style="cursor:pointer;font-family:'Lora',serif;font-size:15px;color:#201f1d;background:transparent;border:1px solid rgba(32,31,29,0.3);padding:13px 20px;border-radius:4px">
           Buscar otro nombre
         </button>
+        <div style="margin-top:28px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;opacity:0.85">Con cariño, Jessica &amp; Juan Daniel</div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isClosed }}" hint-placeholder-val="{{ false }}">
+      <div class="premium-card" role="status" style="padding:40px 28px;max-width:520px;margin:0 auto;text-align:center">
+        <div class="icon-badge">
+          <svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="#b68235" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 6v6l4 2"></path>
+          </svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;line-height:1.15;margin:0 0 14px">{{ closedTitle }}</h3>
+        <p style="font-size:16px;line-height:1.6;opacity:0.9;margin:0 0 12px">{{ closedBody }}</p>
+        <p style="font-size:15px;line-height:1.6;opacity:0.85;margin:0 0 24px">{{ closedHelp }}</p>
+        <sc-if value="{{ hasWhatsapp }}" hint-placeholder-val="{{ false }}">
+          <a href="{{ closedWhatsappUrl }}" target="_blank" rel="noopener" class="btn btn-solid-hover" style="display:inline-flex;align-items:center;justify-content:center;margin:0 0 16px;text-decoration:none;cursor:pointer;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;color:#7d5411;background:transparent;border:1px solid #b68235;padding:13px 22px;border-radius:4px">Escribirnos por WhatsApp</a>
+        </sc-if>
+        <div>
+          <button class="btn" sc-camel-on-click="{{ reset }}" style="cursor:pointer;font-family:'Lora',serif;font-size:15px;color:#201f1d;background:transparent;border:1px solid rgba(32,31,29,0.3);padding:13px 20px;border-radius:4px">
+            Buscar otro nombre
+          </button>
+        </div>
         <div style="margin-top:28px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;opacity:0.85">Con cariño, Jessica &amp; Juan Daniel</div>
       </div>
     </sc-if>
@@ -1099,6 +1122,27 @@ var SEARCH_HEDGE_MS = 3500;    // si un intento no respondió, se lanza otro en 
 var SEARCH_DEADLINE_MS = 16000; // tiempo máximo total antes de mostrar el error
 var SEARCH_CACHE_MS = 120000;  // cuánto se recuerda una respuesta
 
+// Cierre de las confirmaciones. La fuente de verdad es la pestaña
+// "Configuración" del libro de Google (ver apps-script/Codigo.gs): ahí se
+// cierra, se abre o se amplía el plazo, y es el servidor quien decide con su
+// reloj. Este valor solo se usa para el texto mientras llega su respuesta.
+var RSVP_CIERRE_DEFECTO = "2026-10-11 23:59";
+var RSVP_MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+var RSVP_DIAS = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+
+// "2026-10-11 23:59" -> { dia: "domingo", fecha: "11 de octubre", hora: "11:59 p. m." }
+function textoCierre(cierre) {
+  var re = /^(\d{4})-(\d{2})-(\d{2})[ T](\d{1,2}):(\d{2})/;
+  var m = re.exec(String(cierre || "")) || re.exec(RSVP_CIERRE_DEFECTO);
+  var d = +m[3], mo = +m[2], h = +m[4], mi = +m[5];
+  var dow = new Date(Date.UTC(+m[1], mo - 1, d)).getUTCDay();
+  return {
+    dia: RSVP_DIAS[dow],
+    fecha: d + " de " + RSVP_MESES[mo - 1],
+    hora: (h % 12 === 0 ? 12 : h % 12) + ":" + (mi < 10 ? "0" : "") + mi + " " + (h < 12 ? "a. m." : "p. m.")
+  };
+}
+
 function normalize(s) {
   return (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
 }
@@ -1106,13 +1150,13 @@ function normalize(s) {
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { step: "search", query: "", searchError: "", family: null, members: [], matches: [], message: "", now: Date.now(), musicOn: false, audioReady: false, opened: false, introDone: false, carouselIndex: 0, galleryRatio: {}, searching: false, searchNote: "", lightboxImage: null };
+    this.state = { step: "search", query: "", searchError: "", family: null, members: [], matches: [], message: "", now: Date.now(), musicOn: false, audioReady: false, opened: false, introDone: false, carouselIndex: 0, galleryRatio: {}, searching: false, searchNote: "", rsvp: { cerrado: false, motivo: "", cierre: RSVP_CIERRE_DEFECTO, contacto: "" }, closedInfo: null, sending: false, lightboxImage: null };
   }
 
   componentDidMount() {
     var self = this;
     this.timer = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
-    this.audio = new Audio("./assets/audio/musica.mp3?v=2026-09-21.2");
+    this.audio = new Audio("./assets/audio/musica.mp3?v=2026-10-11.3");
     this.audio.loop = true;
     this.audio.volume = 0.5;
     this.audio.addEventListener("error", function () { self.setState({ audioReady: false, musicOn: false }); });
@@ -1128,6 +1172,10 @@ class Component extends DCLogic {
 
     // Red de seguridad: si la portada no llegó a montarse (archivo caído,
     // error de JS o red muy lenta), no dejar la página bloqueada sin scroll.
+    // Pregunta al script si las confirmaciones siguen abiertas (para el texto
+    // de arriba del formulario); tarda ~2 s, por eso va después de la carga.
+    this._estadoTimer = setTimeout(function () { self.cargarEstado(); }, 2500);
+
     this.introWatchdog = setTimeout(function () {
       if (typeof window.IntroCover !== "function" && !self.state.introDone) {
         document.documentElement.style.overflow = "";
@@ -1171,6 +1219,7 @@ class Component extends DCLogic {
     clearTimeout(this.introWatchdog);
     clearTimeout(this._adelantoTimer);
     clearTimeout(this._notaTimer);
+    clearTimeout(this._estadoTimer);
     if (this.audio) this.audio.pause();
     document.documentElement.style.overflow = "";
     document.removeEventListener("keydown", this.onKeyDown);
@@ -1284,7 +1333,8 @@ class Component extends DCLogic {
           .then(function (r) { return r.json(); })
           .then(function (list) {
             if (terminado) return;
-            if (!Array.isArray(list)) throw new Error("respuesta inválida");
+            // Abierto: un arreglo. Cerrado: {cerrado:true, resultados:[...], cierre, contacto}.
+            if (!Array.isArray(list) && !(list && list.cerrado === true && Array.isArray(list.resultados))) throw new Error("respuesta inválida");
             cerrar(); resolve(list);
           })
           .catch(function () {
@@ -1337,11 +1387,19 @@ class Component extends DCLogic {
 
     var url = SHEET_ENDPOINT + "?q=" + encodeURIComponent(q.trim());
     var p = this.fetchList(url).then(function (list) {
-      var items = list.map(function (g) {
+      var cerrado = !Array.isArray(list);
+      var items = (cerrado ? list.resultados : list).map(function (g) {
         return { familia: g.familia, titular: g.titular, cupos: Math.max(1, Number(g.cupos) || 1), confirmada: g.confirmada === true };
       });
-      self._cache[n] = { list: items, at: Date.now(), completa: items.length < SEARCH_CAP };
       delete self._inflight[n];
+      if (cerrado) {
+        // Fuera de plazo: no se guarda en la memoria (si se amplía el plazo,
+        // la próxima búsqueda tiene que ver el cambio) y sigue como "excepción".
+        var err = new Error("cerrado");
+        err.cerrado = true; err.items = items; err.motivo = list.motivo || "plazo"; err.cierre = list.cierre || ""; err.contacto = list.contacto || "";
+        throw err;
+      }
+      self._cache[n] = { list: items, at: Date.now(), completa: items.length < SEARCH_CAP };
       self.seguirBusqueda();
       return items;
     }, function (err) {
@@ -1413,18 +1471,108 @@ class Component extends DCLogic {
       clearTimeout(self._notaTimer);
       // Si mientras esperaba cambió el texto (o se reinició), se descarta.
       if (self.state.query.trim() !== q) { self.setState({ searching: false, searchNote: "" }); return; }
-      if (found.length === 0) {
-        self.setState({ searching: false, searchNote: "", searchError: "No encontramos tu nombre en la lista. Escríbenos y lo revisamos.", matches: [] });
-      } else if (found.length === 1) {
-        self.setState({ searching: false, searchNote: "" });
-        self.pickFamily(found[0]);
-      } else {
-        self.setState({ searching: false, searchNote: "", step: "choose", matches: found, searchError: "" });
-      }
-    }).catch(function () {
+      // El servidor dice que está abierto: si la página creía lo contrario (por
+      // ejemplo se amplió el plazo), se corrige el texto de arriba.
+      if (self.state.rsvp.cerrado) self.setState({ rsvp: Object.assign({}, self.state.rsvp, { cerrado: false, motivo: "" }) });
+      self.repartir(found);
+    }).catch(function (err) {
       clearTimeout(self._notaTimer);
+      if (err && err.cerrado) {
+        if (self.state.query.trim() !== q) { self.setState({ searching: false, searchNote: "" }); return; }
+        self.setState({ rsvp: { cerrado: true, motivo: err.motivo, cierre: err.cierre || self.state.rsvp.cierre, contacto: err.contacto } });
+        // Quien ya había confirmado sigue viendo "Ya recibimos tu confirmación";
+        // a cualquier otro se le explica que el plazo terminó.
+        var todasConfirmadas = err.items.length > 0 && err.items.every(function (g) { return g.confirmada; });
+        if (todasConfirmadas) self.repartir(err.items);
+        else self.mostrarCerrado("plazo", err.items);
+        return;
+      }
       self.setState({ searching: false, searchNote: "", searchError: "No pudimos consultar la lista en este momento. Intenta de nuevo en unos segundos." });
     });
+  }
+
+  // Lleva el resultado de la búsqueda a la pantalla que corresponde.
+  repartir(found) {
+    if (found.length === 0) {
+      this.setState({ searching: false, searchNote: "", searchError: "No encontramos tu nombre en la lista. Escríbenos y lo revisamos.", matches: [] });
+    } else if (found.length === 1) {
+      this.setState({ searching: false, searchNote: "" });
+      this.pickFamily(found[0]);
+    } else {
+      this.setState({ searching: false, searchNote: "", step: "choose", matches: found, searchError: "" });
+    }
+  }
+
+  // Pantalla de "las confirmaciones ya cerraron". variante: "plazo" (la
+  // persona buscó su nombre fuera de plazo) o "carrera" (el plazo terminó
+  // mientras completaba el formulario y su respuesta NO se registró).
+  mostrarCerrado(variante, found) {
+    var fam = this.state.family;
+    var nombre = found && found.length === 1 ? found[0].familia : (fam ? fam.familia : "");
+    this.setState({ step: "closed", searching: false, searchNote: "", searchError: "", sending: false, closedInfo: { variante: variante, nombre: nombre, consulta: this.state.query.trim() } });
+  }
+
+  // Averigua si las confirmaciones siguen abiertas, para el texto de arriba
+  // del formulario. Un script sin esta función (versión vieja) no devuelve
+  // "abierto": en ese caso simplemente no se cambia nada.
+  cargarEstado() {
+    var self = this;
+    if (!SHEET_ENDPOINT) return;
+    var ctrl = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 12000);
+    this._ultimoPedido = Date.now();
+    fetch(SHEET_ENDPOINT + "?estado=1", ctrl ? { signal: ctrl.signal } : undefined)
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        clearTimeout(timer);
+        if (!j || typeof j.abierto !== "boolean") return;
+        self.setState({ rsvp: { cerrado: !j.abierto, motivo: j.motivo || "", cierre: j.cierre || RSVP_CIERRE_DEFECTO, contacto: j.contacto || "" } });
+      })
+      .catch(function () { clearTimeout(timer); });
+  }
+
+  // Envía la confirmación y LEE la respuesta del servidor. Antes se mandaba a
+  // ciegas y siempre se mostraba "Gracias", aunque el servidor la rechazara.
+  // Resuelve { estado: "ok" | "ya" | "cerrado" | "error", motivo, cierre, contacto }.
+  enviarConfirmacion(rows, familia) {
+    var self = this;
+    var ctrl = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 25000);
+    return fetch(SHEET_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ rows: rows }),
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      clearTimeout(timer);
+      if (j && j.ok === true) return { estado: "ok" };
+      if (j && j.error === "cerrado") return { estado: "cerrado", motivo: j.motivo || "plazo", cierre: j.cierre, contacto: j.contacto };
+      if (j && j.error === "ya-confirmada") return { estado: "ya" };
+      return { estado: "error" };
+    }).catch(function () {
+      clearTimeout(timer);
+      // No se pudo leer la respuesta (sin conexión, o un navegador que no deja
+      // leerla): el envío pudo haber llegado igual, así que se comprueba.
+      return self.verificarEnviado(familia);
+    });
+  }
+
+  verificarEnviado(familia) {
+    var ctrl = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 12000);
+    return fetch(SHEET_ENDPOINT + "?q=" + encodeURIComponent(familia), ctrl ? { signal: ctrl.signal } : undefined)
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        clearTimeout(timer);
+        var lista = Array.isArray(j) ? j : (j && Array.isArray(j.resultados) ? j.resultados : null);
+        if (!lista) return { estado: "error" };
+        var n = normalize(familia);
+        var hallada = lista.filter(function (g) { return normalize(g.familia) === n; })[0];
+        if (hallada && hallada.confirmada) return { estado: "ok" };
+        if (j && j.cerrado === true) return { estado: "cerrado", motivo: j.motivo || "plazo", cierre: j.cierre, contacto: j.contacto };
+        return { estado: "error" };
+      })
+      .catch(function () { clearTimeout(timer); return { estado: "error" }; });
   }
 
   updateMember(i, patch) {
@@ -1443,6 +1591,32 @@ class Component extends DCLogic {
     var target = new Date(2026, 9, 24, 17, 0, 0).getTime();
     var diff = Math.max(0, target - this.state.now);
     var pad = function (n) { return n < 10 ? "0" + n : String(n); };
+
+    // Textos del cierre de confirmaciones. Todo sale de lo que informa el
+    // script (fecha límite, motivo, contacto), así que si se amplía el plazo
+    // desde la hoja los textos se ajustan solos.
+    var rs = this.state.rsvp, tc = textoCierre(rs.cierre), ci = this.state.closedInfo || {};
+    var cuando = tc.dia + " " + tc.fecha + " a las " + tc.hora;
+    var manual = rs.motivo === "manual";
+    var wa = String(rs.contacto || "").replace(/\D/g, "");
+    if (wa.length < 8) wa = "";
+    var carrera = ci.variante === "carrera";
+    // "p. m." ya trae su punto: al cerrar una oración con la hora no se agrega otro.
+    var punto = function (s) { return /\.$/.test(s) ? s : s + "."; };
+    var rsvpIntro = rs.cerrado
+      ? (manual ? "Las confirmaciones ya están cerradas." : punto("Las confirmaciones cerraron el " + cuando)) + " Si ya confirmaste, puedes buscar tu nombre para comprobarlo."
+      : punto("Por favor confirma hasta el " + tc.fecha + " a las " + tc.hora);
+    var closedTitle = carrera ? "Tu respuesta no alcanzó a registrarse" : "Las confirmaciones ya cerraron";
+    var closedBody = carrera
+      ? (manual ? "Cerramos la recepción de confirmaciones mientras completabas el formulario, y por eso tu respuesta no quedó registrada." : "Las confirmaciones cerraron el " + cuando + ", mientras completabas el formulario, y por eso tu respuesta no quedó registrada.") + " Lamentamos mucho que haya ocurrido justo ahora."
+      : (manual ? "Ya cerramos la recepción de confirmaciones para poder organizar cada detalle con cuidado, y por eso no podemos recibir nuevas respuestas desde aquí." : punto("El plazo terminó el " + cuando) + " Lo necesitábamos para organizar cada detalle con cuidado, y por eso ya no podemos recibir nuevas respuestas desde aquí.");
+    var closedHelp = carrera
+      ? (wa ? "Escríbenos por WhatsApp y con gusto revisamos tu caso." : "Comunícate directamente con nosotros y con gusto revisamos tu caso.")
+      : "Si ya confirmaste, no tienes que hacer nada: tu respuesta quedó registrada. Si crees que se trata de un error o necesitas avisarnos algo, " + (wa ? "escríbenos por WhatsApp." : "comunícate directamente con nosotros.");
+    var waNombre = ci.nombre || ci.consulta || "";
+    var waTexto = carrera
+      ? "Hola, intenté confirmar mi asistencia a la boda" + (waNombre ? " (invitación de \"" + waNombre + "\")" : "") + " justo cuando cerró el plazo y mi respuesta no quedó registrada."
+      : "Hola, quería confirmar mi asistencia a la boda" + (waNombre ? " (invitación de \"" + waNombre + "\")" : "") + " y vi que el plazo ya cerró.";
 
     var activePhoto = GALLERY_PHOTOS[this.state.carouselIndex];
     var carouselRatio = (activePhoto && this.state.galleryRatio[activePhoto.src]) || "2 / 3";
@@ -1509,6 +1683,15 @@ class Component extends DCLogic {
       }),
       isFamily: this.state.step === "family",
       isAlready: this.state.step === "already",
+      isClosed: this.state.step === "closed",
+      rsvpIntro: rsvpIntro,
+      closedTitle: closedTitle,
+      closedBody: closedBody,
+      closedHelp: closedHelp,
+      hasWhatsapp: !!wa,
+      closedWhatsappUrl: wa ? "https://wa.me/" + wa + "?text=" + encodeURIComponent(waTexto) : "#",
+      confirmLabel: this.state.sending ? "Enviando…" : "Confirmar asistencia",
+      confirmOpacity: this.state.sending ? "0.6" : "1",
       isDone: this.state.step === "done",
       query: this.state.query,
       searchError: this.state.searchError || this.state.searchNote,
@@ -1555,6 +1738,7 @@ class Component extends DCLogic {
       doSearch: function () { self.search(); },
       setMessage: function (e) { self.setState({ message: e.target.value }); },
       confirm: function () {
+        if (self.state.sending) return;
         var fam2 = self.state.family;
         var sinNombre = self.state.members.filter(function (m) { return m.name.trim() === ""; });
         if (sinNombre.length > 0) {
@@ -1577,18 +1761,26 @@ class Component extends DCLogic {
               mensaje: self.state.message
             };
           });
-        if (SHEET_ENDPOINT) {
-          fetch(SHEET_ENDPOINT, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "text/plain;charset=utf-8" },
-            body: JSON.stringify({ rows: rows })
-          }).catch(function () {});
-        }
-        self._cache = {};  // que una búsqueda posterior vea a la familia como ya confirmada
-        self.setState({ step: "done", formError: "" });
+        if (!SHEET_ENDPOINT) { self.setState({ step: "done", formError: "" }); return; }
+        self.setState({ sending: true, formError: "" });
+        self.enviarConfirmacion(rows, fam2 ? fam2.familia : "").then(function (res) {
+          self._cache = {};  // que una búsqueda posterior vea a la familia como ya confirmada
+          if (res.estado === "ok") {
+            self.setState({ sending: false, step: "done", formError: "" });
+          } else if (res.estado === "ya") {
+            self.setState({ sending: false, step: "already", formError: "" });
+          } else if (res.estado === "cerrado") {
+            self.setState({ rsvp: { cerrado: true, motivo: res.motivo, cierre: res.cierre || self.state.rsvp.cierre, contacto: res.contacto || "" } });
+            self.mostrarCerrado("carrera", null);
+          } else {
+            self.setState({ sending: false, formError: "No pudimos enviar tu confirmación. Revisa tu conexión e inténtalo de nuevo; si ya la habías enviado, aparecerá como recibida." });
+          }
+        });
       },
-      reset: function () { self.setState({ step: "search", query: "", family: null, members: [], matches: [], message: "", searchError: "" }); }
+      reset: function () {
+        if (self.state.sending) return;
+        self.setState({ step: "search", query: "", family: null, members: [], matches: [], message: "", searchError: "", closedInfo: null });
+      }
     };
   }
 }

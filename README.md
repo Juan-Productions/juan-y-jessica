@@ -6,6 +6,8 @@ Invitación web de una sola página, con cuenta regresiva, música de fondo y co
 
 ```
 index.html                     página principal (autocontenida)
+apps-script/
+  Codigo.gs                    backend de Google (búsqueda de invitados, confirmaciones, cierre del plazo)
 scripts/
   bump-version.js              actualiza la versión de caché (correr antes de cada commit)
   build-intro.js               compila intro-cover.jsx -> intro-cover.js
@@ -43,6 +45,34 @@ y entra a `http://localhost:5173`.
 - **Fotos** (portada, versículo, galería): todas son `<img>` normales — funcionan en cualquier hosting, no hay que editarlas desde ningún editor especial. Instrucciones y nombres exactos de archivo en [assets/photos/README.md](assets/photos/README.md); básicamente: subís los archivos con esos nombres a `assets/photos/` y listo.
 - **Foto de portada**: es estática a propósito — no tiene botón de reemplazo, ni se puede ampliar/hacer clic (a diferencia de las demás fotos, que sí abren en grande al tocarlas).
 - **Textos y estilos**: son HTML/CSS planos dentro del mismo `index.html`.
+
+## Cierre de las confirmaciones
+
+El plazo para confirmar se controla **desde la hoja de Google**, en la pestaña
+`Configuración` (el script la crea sola la primera vez que se consulta). No hace
+falta tocar el sitio ni volver a publicar nada:
+
+| Celda | Qué es | Ejemplo |
+|---|---|---|
+| `B3` Recibir confirmaciones | `SÍ` = abiertas hasta la fecha límite · `NO` = cerradas desde ya | `SÍ` |
+| `B4` Fecha y hora límite | Hora de Colombia. Si solo pones el día, se entiende hasta las 11:59 p. m. | `2026-10-11 23:59` |
+| `B5` WhatsApp de contacto | Opcional. Con código de país, sin espacios. Si lo llenas, el aviso de cierre muestra un botón "Escribirnos por WhatsApp" | `573001234567` |
+
+- **Ampliar el plazo**: cambia `B4` (por ejemplo a `2026-10-14 23:59`) y deja `B3` en `SÍ`. El sitio
+  ajusta solo los textos ("Por favor confirma hasta el 14 de octubre…"). Se aplica en ~15 s.
+- **Cerrar ya mismo**: pon `NO` en `B3`.
+- **Comprobar el estado**: abre `URL_DEL_SCRIPT/exec?estado=1` en el navegador; muestra si está
+  abierto o cerrado, la fecha efectiva y la hora que el servidor cree que es (`ahora`).
+- Se acepta hasta el último segundo del minuto indicado (con `23:59` se recibe hasta las 11:59:59 p. m.).
+- **El servidor decide, no el teléfono de quien confirma**: aunque alguien se salte el sitio, un envío
+  fuera de plazo se rechaza en Google y no se escribe nada.
+- Si la fecha de `B4` se daña o la pestaña se borra, el cierre sigue ocurriendo en `CIERRE_POR_DEFECTO`
+  (dentro del script); `?estado=1` lo avisa en el campo `aviso`.
+- Quien **ya había confirmado** y vuelve a buscar su nombre fuera de plazo sigue viendo "Ya recibimos tu
+  confirmación"; a los demás se les explica que el plazo terminó. Si el plazo vence mientras alguien
+  llena el formulario, ve un aviso claro de que su respuesta **no** se registró (nunca un "Gracias" falso).
+- El código del script está en [apps-script/Codigo.gs](apps-script/Codigo.gs) (copia de referencia: lo
+  que corre de verdad es lo que está pegado en Extensiones → Apps Script del libro).
 
 ## Galería con carrusel
 
